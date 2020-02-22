@@ -36,24 +36,17 @@ with open(csvpath, newline="",encoding='utf8') as csvfile:
         MonthCounter.append(row[0])
 
     
-
-#Check to see if the Lists were created correctly
-#for i in range(10):
-#    print(f"{ProfitsLosses[i]}  {MonthCounter[i]}")
-
 #Tracks the monthly changes in profits/losses and stores them in a new list
 for j,x in enumerate(ProfitsLosses):
     if j == 0:
         MonthlyChanges.append(0)
     else:
+        #Subtracts the previous month's amount from the current amount, and stores the change
         pre = ProfitsLosses[j-1]
-        post = ProfitsLosses[j]
-        change = post - pre
+        current = ProfitsLosses[j]
+        change = current - pre
         MonthlyChanges.append(change)
 
-#Check to see if the MonthlyChanges list works
-
-#print(f"{MonthlyChanges}")
 
 #Finds the average of the changes in Profits/Losses over the period
 for c,x in enumerate(MonthlyChanges):
@@ -62,17 +55,20 @@ for c,x in enumerate(MonthlyChanges):
 #Finds the average, taking away 1 from the length to account for the first month not being tracked
 average = total / (len(MonthlyChanges)-1)
 
-#Looks through the average changes list and tracks which one is the greatest increase in profits, storing the value and month in variables
+#Looks through the average changes list and tracks which one is the greatest increase in profits, 
+#storing the value and month in variables
 greatest_profit = MonthlyChanges[0]
 greatest_profit_month = MonthCounter[0]
 greatest_losses = MonthlyChanges[0]
 greatest_losses_month = MonthCounter[0]
 
+#Searches through the monthly changes for the greatest profit change, and stores the highest
 for i,x in enumerate(MonthlyChanges[1:]):
     if MonthlyChanges[i] > greatest_profit:
         greatest_profit = MonthlyChanges[i]
         greatest_profit_month = MonthCounter[i]
 
+#Searches through the monthly changes for the greatest losses change, and stores the amount
 for i,x in enumerate(MonthlyChanges[1:]):
     if MonthlyChanges[i] < greatest_losses:
         greatest_losses = MonthlyChanges[i]
@@ -89,10 +85,11 @@ print(f"Greatest Decrease in Profits: {greatest_losses_month} (${round(greatest_
 
  
 # Open the file using "write" mode
-output_path = os.path.join("PyBankAnalysis.txt")
+output_path = os.path.join("Output","PyBankAnalysis.txt")
 
 f = open(output_path, 'w')
 
+#Writes the analysis to a txt file
 f.write("Financial Analysis \n")
 f.write("------------------------\n")
 f.write(f"Total Months: {Date_Count}\n")
