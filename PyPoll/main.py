@@ -6,8 +6,6 @@ import os
 import csv
 
 
-
-
 #Initialize variables to store and count the data from the file
 Vote_Count = 0
 Candidate_Totals = []
@@ -74,16 +72,16 @@ for x in Votes_List:
     Votes = round((x / Vote_Count) * 100,0)
     Vote_Percentage.append(Votes)
 
-
+#Stores the first candidate in the Winner value by default
 Winner = Votes_List[0]
 Winner_Name = Candidate_List[0]
 
+#Searches through the candidates for the one with the highest votes, assigning them the winner
 for x in range(len(Candidate_List)):
     if Votes_List[x] > Winner:
         Winner = Votes_List[x]
         Winner_Name = Candidate_List[x]
-#print(Votes_List)
-#print(Vote_Percentage)
+
 
 #Prints out the analysis to the terminal
 print("Election Results")
@@ -101,6 +99,7 @@ print("------------------------")
 # Open the file using "write" mode
 output_path = os.path.join("Output","PyPollAnalysis.txt")
 
+#Write the analysis to a txt file
 f = open(output_path, 'w')
 
 f.write("Election Results \n")
