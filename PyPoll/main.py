@@ -13,14 +13,16 @@ Vote_Count = 0
 Candidate_Totals = []
 Candidate_List = []
 Votes_List = []
-total = 0
+
 
 def VotesForCandidate(candidate):
     Voters = 0
-    for row in Candidate_List:
+    for i in Candidate_Totals:
        
-        if str(Candidate_List[row[0]]) == candidate:
+        if i == candidate:
             Voters += 1
+ 
+    return Voters
 
 #Create variable for file path to the datafile
 csvpath = os.path.join('Resources', 'election_data.csv')
@@ -58,18 +60,11 @@ for j,x in enumerate(Candidate_Totals):
                 Candidate_List.append(Candidate_Totals[j])
 
             
-        
-
-print(Candidate_List)
-
-
-    
-
-#Check to see if the Lists were created correctly
-#for i in range(10):
-#  print(f"{Candidate_List[i]} ")
+for x in Candidate_List:
+    Votes_List.append(VotesForCandidate(x))
 
 
+print(Votes_List)
 
 #Prints out the analysis to the terminal
 #print("Election Results")
